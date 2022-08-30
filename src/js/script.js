@@ -16,14 +16,12 @@ function renderBooks() {
 
 
 function initActions() {
-  const booksDOMs = document.querySelectorAll('.book__image');
-  for (let book of booksDOMs) {
-    book.addEventListener('dblclick', function (event) {
-      event.preventDefault();
-      favoriteBooks.push(book.getAttribute('data-id'));
-      book.classList.toggle('favorite');
-    });
-  }
+  const booksWrapper = document.querySelector('.books-list');
+  booksWrapper.addEventListener('dblclick', function (event) {
+    event.preventDefault();
+    favoriteBooks.push(event.target.offsetParent.getAttribute('data-id'));
+    event.target.offsetParent.classList.toggle('favorite');
+  });
 }
 
 renderBooks();

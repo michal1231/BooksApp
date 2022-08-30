@@ -21,7 +21,7 @@ function initActions() {
     book.addEventListener('dblclick', function (event) {
       event.preventDefault();
       favoriteBooks.push(book.getAttribute('data-id'));
-      book.classList.add('favorite');
+      book.classList.toggle('favorite');
     });
   }
 }

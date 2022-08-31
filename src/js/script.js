@@ -13,6 +13,16 @@ function renderBooks() {
   for (let book of dataSource.books) {
     const generatedHTML = bookDisplay(book);
     const generatedDOM = utils.createDOMFromHTML(generatedHTML);
+    const ratingDOM = generatedDOM.querySelector('.book__rating__fill');
+    if (book.rating < 6) {
+      ratingDOM.style = `background: linear-gradient(to right, #fefcea ${book.rating * 10}%,transparent ${100 - book.rating * 10}%)`;
+    } else if (book.rating > 6 && book.rating <= 8) {
+      ratingDOM.style = `background: linear-gradient(to right, #b4df5b ${book.rating * 10}%,transparent ${100 - book.rating * 10}%)`;
+    } else if (book.rating > 8 && book.rating <= 9) {
+      ratingDOM.style = `background: linear-gradient(to right, #299a0b ${book.rating * 10}%,transparent ${100 - book.rating * 10}%)`;
+    } else {
+      ratingDOM.style = `background: linear-gradient(to right, #ff0084 ${book.rating * 10}%,transparent ${100 - book.rating * 10}%)`;
+    }
     bookListWrapper.appendChild(generatedDOM);
   }
 }
@@ -20,6 +30,10 @@ function renderBooks() {
 
 function initActions() {
   const booksWrapper = document.querySelector('.books-list');
+
+  booksWrapper.addEventListener('click', function (event) {
+    event.preventDefault();
+  });
 
   booksWrapper.addEventListener('dblclick', function (event) {
     event.preventDefault();
